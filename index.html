@@ -34,6 +34,24 @@
             margin-top: 0;
             margin-bottom: 25px;
         }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .controls input, .controls select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .controls input {
+            flex-grow: 1;
+        }
+        .controls select {
+            width: 200px; /* Adjust size for the dropdown */
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -61,8 +79,15 @@
             width: 50px;
         }
 
-        /* Responsive Design: Stacks columns on smaller screens */
+        /* Responsive Design */
         @media screen and (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            .controls input, .controls select {
+                width: 100%;
+                margin-bottom: 10px;
+            }
             table, thead, tbody, th, td, tr {
                 display: block;
             }
@@ -97,7 +122,7 @@
                 transform: translateY(-50%);
                 text-align: left;
             }
-            td:nth-child(1) { /* NO. column style fix for mobile */
+            td:nth-child(1) {
                 text-align: right;
                 padding-left: 50%;
             }
@@ -109,6 +134,14 @@
     <div class="container">
         <h1>NORTHWESTERN TRAINING INSTITUTE</h1>
         <h2>Student Enrollment List (Total: 201 Entries)</h2>
+
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search by Name or Course..." onkeyup="filterTable()">
+            <select id="courseFilter" onchange="filterTable()">
+                <option value="">All Courses</option>
+            </select>
+        </div>
+        
         <table id="enrollmentTable">
             <thead>
                 <tr>
@@ -325,25 +358,68 @@
             { no: 199, name: 'WAFULA MACHUMA WINNIE', course: 'MA –ARTS RELIGION' },
             { no: 200, name: 'EVANS MUAMBU WATERA', course: 'PhD- KISWAHILI' },
             // Added to meet the request for 201 graduates
-            { no: 201, name: 'EVANS MUAMBU WATERA', course: 'PhD- KISWAHILI' } 
+            { no: 201, name: 'JANE DOE', course: 'DIP-BIBLE & THEOLOGY' } 
         ];
 
         const tableBody = document.querySelector('#enrollmentTable tbody');
 
-        enrollmentData.forEach(student => {
-            const row = tableBody.insertRow();
-            
-            let cellNo = row.insertCell();
-            cellNo.textContent = student.no;
-            cellNo.setAttribute('data-label', 'NO.');
+        // Function to render the table (now used for initial load and filtering)
+        function renderTable(data) {
+            tableBody.innerHTML = ''; // Clear existing rows
+            data.forEach(student => {
+                const row = tableBody.insertRow();
+                
+                let cellNo = row.insertCell();
+                cellNo.textContent = student.no;
+                cellNo.setAttribute('data-label', 'NO.');
 
-            let cellName = row.insertCell();
-            cellName.textContent = student.name;
-            cellName.setAttribute('data-label', 'Name');
+                let cellName = row.insertCell();
+                cellName.textContent = student.name;
+                cellName.setAttribute('data-label', 'Name');
 
-            let cellCourse = row.insertCell();
-            cellCourse.textContent = student.course;
-            cellCourse.setAttribute('data-label', 'Course/Level');
+                let cellCourse = row.insertCell();
+                cellCourse.textContent = student.course;
+                cellCourse.setAttribute('data-label', 'Course/Level');
+            });
+        }
+
+        // Function to populate the Course Filter dropdown
+        function populateCourseFilter() {
+            const courses = [...new Set(enrollmentData.map(item => item.course))];
+            const filterDropdown = document.getElementById('courseFilter');
+
+            courses.sort().forEach(course => {
+                const option = document.createElement('option');
+                option.value = course;
+                option.textContent = course;
+                filterDropdown.appendChild(option);
+            });
+        }
+
+        // Function to handle Search and Filter logic
+        function filterTable() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const courseFilterValue = document.getElementById('courseFilter').value;
+
+            const filteredData = enrollmentData.filter(student => {
+                // 1. Check Course Filter
+                const courseMatch = courseFilterValue === "" || student.course === courseFilterValue;
+
+                // 2. Check Search Input
+                const searchMatch = 
+                    student.name.toLowerCase().includes(searchInput) ||
+                    student.course.toLowerCase().includes(searchInput);
+
+                return courseMatch && searchMatch;
+            });
+
+            renderTable(filteredData);
+        }
+
+        // Initialize the table and filter when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable(enrollmentData);
+            populateCourseFilter();
         });
     </script>
 
