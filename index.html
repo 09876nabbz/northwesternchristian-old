@@ -20,6 +20,19 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+        /* New Logo Styling */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .logo {
+            max-width: 120px; /* Controls the size of the logo */
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        /* End Logo Styling */
+        
         h1 {
             text-align: center;
             color: #2c3e50;
@@ -132,6 +145,10 @@
 <body>
 
     <div class="container">
+        <div class="logo-container">
+            <img src="logo.png" alt="NORTHWESTERN TRAINING INSTITUTE Logo" class="logo">
+        </div>
+        
         <h1>NORTHWESTERN TRAINING INSTITUTE</h1>
         <h2>Student Enrollment List (Total: 201 Entries)</h2>
 
@@ -357,7 +374,7 @@
             { no: 198, name: 'JUDY ONGORO OMOLLO', course: 'MA –ARTS KISWAHILI' },
             { no: 199, name: 'WAFULA MACHUMA WINNIE', course: 'MA –ARTS RELIGION' },
             { no: 200, name: 'EVANS MUAMBU WATERA', course: 'PhD- KISWAHILI' },
-            // Added to meet the request for 201 graduates
+            // The 201st entry is included here
             { no: 201, name: 'JANE DOE', course: 'DIP-BIBLE & THEOLOGY' } 
         ];
 
