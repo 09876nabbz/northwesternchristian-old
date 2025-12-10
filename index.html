@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NORTH WESTERN CHRISTIAN TRAINING INSTITUTE - Enrollment List (214 Graduates)</title>
+    <title>NORTH WESTERN CHRISTIAN TRAINING INSTITUTE - Enrollment List (220 Graduates)</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
@@ -14,7 +14,7 @@
         </div>
         
         <h1>NORTH WESTERN CHRISTIAN TRAINING INSTITUTE</h1>
-        <h2>Student Enrollment List (Total: 214 Entries)</h2>
+        <h2>Student Enrollment List (Total: 220 Entries)</h2>
 
         <div class="controls">
             <input type="text" id="searchInput" placeholder="Search by Name or Course..." onkeyup="filterTable()">
@@ -70,7 +70,7 @@
             { no: 30, name: 'BANARD KARIUKI MUNGAI', course: 'DIP-BIBLE & THEOLOGY' },
             { no: 31, name: 'JONATHAN .K. CHEBOR', course: 'DIP-BIBLE & THEOLOGY' },
             { no: 32, name: 'NANCY NAKHUNGU KHAKAME', course: 'DIP-COUNSELING PSYCHOLOGY' },
-            { no: 33, name: 'SAMWEL KARANJA NGIGI', course: 'MA-COUNSELING PSYCHOLOGY' },
+            { no: 33, name: 'SAMWEL KARANJA NGUGI', course: 'MA-COUNSELING PSYCHOLOGY' },
             { no: 34, name: 'PAUL MBURU NG’ANG’A', course: 'MA-COUNSELING PSYCHOLOGY' },
             { no: 35, name: 'ROSE NYOTIAH WANYAMA', course: 'MA-COUNSELING PSYCHOLOGY' },
             { no: 36, name: 'MADINA TEMKO', course: 'MA-COUNSELING PSYCHOLOGY' },
@@ -160,7 +160,7 @@
             { no: 120, name: 'ZIPIA NABAKENI WEKATI', course: 'BA DEGREE-EDUCATION ARTS' },
             { no: 121, name: 'CHARLES MANDEY BARASA', course: 'BA SPECIAL NEEDS' },
             { no: 122, name: 'WANJALA MOSES', course: 'BA ARTS IN KISWAHILI / CRE' },
-            { no: 123, name: 'DORINE NASAMBU LUSAKA', course: 'BA BUSINESS ADMINISTRATION AND MANAGEMENT' },
+            { no: 123, name: 'DOUREEN NASAMBU LUSAKA', course: 'BA BUSINESS ADMINISTRATION AND MANAGEMENT' },
             { no: 124, name: 'KUKALI GEORGE SIMIYU', course: 'BA BUSINESS ADMINISTRATION AND MANAGEMENT' },
             { no: 125, name: 'ANN YEKO CHESETO', course: 'BA EARLY CHILDHOOD EDUCATION (ECDE) & PRIMARY' },
             { no: 126, name: 'HARRY M. SAENYI', course: 'BA EDUCATION ARTS HISTORY & KISWAHILI' },
@@ -240,7 +240,7 @@
             { no: 200, name: 'EVANS MUAMBU WATERA', course: 'PhD- KISWAHILI' },
             { no: 201, name: 'JANE DOE', course: 'DIP-BIBLE & THEOLOGY' },
             
-            /* --- NEW GRADUATES ADDED BELOW (202 - 214) --- */
+            /* --- PREVIOUSLY ADDED GRADUATES --- */
             { no: 202, name: 'JEREMIAH OCHIENG OMONDI', course: 'MA-COUNSELING PSYCHOLOGY' },
             { no: 203, name: 'LUCY NGIMA MARIGI', course: 'MA-LEADERSHIP & ADMINISTRATION' },
             { no: 204, name: 'GABRIEL NAMISI WAFULA', course: 'BA DEGREE' },
@@ -253,10 +253,30 @@
             { no: 211, name: 'JUDY ONKORO OMOLLO', course: 'MA-ARTS KISWAHILI' },
             { no: 212, name: 'WAFULA MACHUMA WINNIE', course: 'MA-ARTS' },
             { no: 213, name: 'EVANS MWAMBU WATELA', course: 'PHD-KISWAHILI' },
-            { no: 214, name: 'JOHN NJAU CHARGE', course: 'BA DEGREE-BIBLE & THEOLOGY' }
+            { no: 214, name: 'JOHN NJAU CHEGE', course: 'BA DEGREE-BIBLE & THEOLOGY' },
+
+            /* --- NEW ADDITIONS AND CORRECTIONS (215 - 220) --- */
+            { no: 215, name: 'JEREMIAH EKITELA LOKINYI', course: 'DIPLOMA' },
+            { no: 216, name: 'JORAM KIMOI WACHAHI', course: 'DIPLOMA' },
+            { no: 217, name: 'BETH WANJIRU GICHU', course: 'CERT' },
+            { no: 218, name: 'MOSE AKAMA EVANS', course: 'DEGREE-PUBLIC ADMINISTRATION & POLITICAL SCIENCE' },
+            { no: 219, name: 'STEPHEN OBURU OGECHI', course: 'DEGREE-CRIMINOLOGY' },
+            { no: 220, name: 'ELIZABETH KENYA', course: 'DIP-BIBLE & THEOLOGY' }
         ];
 
         const tableBody = document.querySelector('#enrollmentTable tbody');
+
+        // NEW: Debounce function to limit how often a function runs (improves performance)
+        function debounce(func, delay) {
+            let timeoutId;
+            return function(...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+        // END NEW FUNCTION
 
         // Function to render the table 
         function renderTable(data) {
@@ -291,27 +311,23 @@
             });
         }
 
-        // Function to handle Scroll-based color change (NEW FUNCTION)
+        // Function to handle Scroll-based color change 
         function handleScroll() {
             const scrollPosition = window.scrollY;
             const body = document.body;
             
-            // Defines scroll checkpoints. Adjust the pixel values (500, 1500, 2500) if you want the colors to change more or less frequently.
+            // Defines scroll checkpoints. 
             if (scrollPosition < 500) {
-                // Theme 1 (Default)
                 body.className = ''; 
             } else if (scrollPosition >= 500 && scrollPosition < 1500) {
-                // Theme 2: Applies .color-theme-2 class
                 body.className = 'color-theme-2'; 
             } else if (scrollPosition >= 1500 && scrollPosition < 2500) {
-                // Theme 3: Applies .color-theme-3 class
                 body.className = 'color-theme-3';
             } else {
-                // Theme 4: Applies .color-theme-4 class
                 body.className = 'color-theme-4'; 
             }
         }
-        // END NEW FUNCTION
+        
 
         // Function to handle Search and Filter logic
         function filterTable() {
@@ -332,17 +348,19 @@
 
             renderTable(filteredData);
         }
+        
+        // NEW: Debounced scroll handler (runs handleScroll function at most once every 50 milliseconds)
+        const debouncedScroll = debounce(handleScroll, 50);
 
         // Initialize the table and filter when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             renderTable(enrollmentData);
             populateCourseFilter();
-            // Run the scroll handler once on load to set the initial color
             handleScroll(); 
         });
 
-        // Attach the scroll handler to the window scroll event (NEW)
-        window.onscroll = handleScroll;
+        // Attach the debounced scroll handler to the window scroll event
+        window.onscroll = debouncedScroll;
     </script>
 
 </body>
