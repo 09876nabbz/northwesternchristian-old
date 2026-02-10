@@ -120,7 +120,6 @@
 </div>
 
 <script>
-    // Standardized data for better filtering
     const enrollmentData = [
         { no: 1, name: "KOCHARA PETER LOTIANG", course: "DIP-BIBLE & THEOLOGY" },
         { no: 2, name: "BOAZ ASICHE MUTEKWA", course: "DIP-BIBLE & THEOLOGY" },
@@ -349,7 +348,11 @@
         { no: 225, name: "JOHN SIFUNA WAFULA", course: "BA-BIBLE & THEOLOGY" },
         { no: 226, name: "MADINA TEMKO", course: "MA-COUNSELING PSYCHOLOGY" },
         { no: 227, name: "MADINA TEMKO", course: "BA-COUNSELING PSYCHOLOGY" },
-        { no: 228, name: "JOSEPHINE NANJALA SIMEMA", course: "DIP-BIBLE & THEOLOGY" }
+        { no: 228, name: "JOSEPHINE NANJALA SIMEMA", course: "DIP-BIBLE & THEOLOGY" },
+        { no: 229, name: "ELIZABETH NASAMBU SIMIYU", course: "DIP-BIBLE & THEOLOGY" },
+        { no: 230, name: "ALICE NALIAKA WEKESA", course: "DIP-BIBLE & THEOLOGY" },
+        { no: 231, name: "JANET NASAMBU LUSAKA", course: "DIP-BIBLE & THEOLOGY" },
+        { no: 232, name: "JOHN SIFUNA WAFULA", course: "DIP-BIBLE & THEOLOGY" }
     ];
 
     const tableBody = document.getElementById('tableBody');
@@ -382,7 +385,6 @@
     }
 
     function init() {
-        // Build course filter list
         const uniqueCourses = [...new Set(enrollmentData.map(s => s.course))].sort();
         const select = document.getElementById('courseFilter');
         uniqueCourses.forEach(course => {
